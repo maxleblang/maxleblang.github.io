@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
   const typewriterElement = document.getElementById('typewriter');
-  const phrases = ['Max Leblang', 'an engineer', 'a builder'];
+  const phrases = ['Max Leblang', 'an Engineer', 'a Builder', 'an Entrepreneur', 'a Musician'];
   let phraseIndex = 0;
   let charIndex = 0;
   let isDeleting = false;
