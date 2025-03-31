@@ -31,7 +31,7 @@ h1 {
 }
 
 .static-text {
-  margin-right: .75rem;
+  margin-right: 13px;
   background: linear-gradient(to right, #e0e0e0, #b0b0b0);
   -webkit-background-clip: text;
   background-clip: text;
