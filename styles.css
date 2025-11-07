@@ -566,16 +566,33 @@ body {
 @media (max-width: 768px) {
   .hero {
     padding: var(--spacing-2xl) var(--spacing-lg) var(--spacing-xl);
+    min-height: auto;
   }
 
   .hero-title-wrapper {
     flex-direction: column;
     gap: var(--spacing-sm);
+    min-height: auto;
   }
 
-  .static-text,
+  .static-text {
+    font-size: clamp(1.8rem, 5vw, 2.5rem);
+    line-height: 1;
+  }
+
+  .typewriter-container {
+    height: auto;
+    min-height: auto;
+  }
+
   .typewriter {
-    font-size: clamp(2rem, 5vw, 3rem);
+    font-size: clamp(1.8rem, 5vw, 2.5rem);
+    height: auto;
+    min-height: auto;
+  }
+
+  .cursor {
+    height: clamp(1.8rem, 5vw, 2.5rem);
   }
 
   .projects-grid {
@@ -586,6 +603,11 @@ body {
   .project-header {
     flex-direction: column;
     align-items: flex-start;
+    min-height: auto;
+  }
+
+  .project-tag {
+    position: static;
   }
 
   .cta-buttons {
@@ -609,6 +631,24 @@ body {
 
   .hero {
     padding: var(--spacing-xl) var(--spacing-md) var(--spacing-lg);
+    min-height: auto;
+  }
+
+  .hero-title-wrapper {
+    min-height: auto;
+  }
+
+  .static-text {
+    font-size: clamp(1.5rem, 4vw, 2rem);
+  }
+
+  .typewriter {
+    font-size: clamp(1.5rem, 4vw, 2rem);
+    height: auto;
+  }
+
+  .cursor {
+    height: clamp(1.5rem, 4vw, 2rem);
   }
 
   .scroll-indicator {
@@ -621,6 +661,7 @@ body {
 
   .section-title {
     margin-bottom: var(--spacing-lg);
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
   }
 
   .project-card {
