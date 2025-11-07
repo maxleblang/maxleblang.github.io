@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
   // ============================================================================
   
   const typewriterElement = document.getElementById('typewriter');
+  const typewriterContainer = document.querySelector('.typewriter-container');
   const phrases = ['Max Leblang', 'an Engineer', 'a Programmer', 'a Builder', 'an Entrepreneur'];
   let phraseIndex = 0;
   let charIndex = 0;
@@ -42,6 +43,50 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Start the typing effect with delay
   setTimeout(type, 800);
+
+  // ============================================================================
+  // STABILIZE TYPEWRITER CONTAINER WIDTH (prevents layout shift on mobile)
+  // ============================================================================
+
+  function measureAndSetTypewriterWidth() {
+    if (!typewriterElement || !typewriterContainer) return;
+    const style = getComputedStyle(typewriterElement);
+    const measurer = document.createElement('span');
+    measurer.style.position = 'absolute';
+    measurer.style.visibility = 'hidden';
+    measurer.style.whiteSpace = 'pre';
+    measurer.style.fontFamily = style.fontFamily;
+    measurer.style.fontSize = style.fontSize;
+    measurer.style.fontWeight = style.fontWeight;
+    measurer.style.letterSpacing = style.letterSpacing;
+    measurer.textContent = phrases.reduce((a, b) => (a.length > b.length ? a : b));
+    document.body.appendChild(measurer);
+    const width = Math.ceil(measurer.getBoundingClientRect().width);
+    measurer.remove();
+    // Add small padding for cursor and gap; clamp to viewport width
+    const extra = 10;
+    const maxWidth = Math.max(0, window.innerWidth - 2 * 24); // account for padding
+    const finalWidth = Math.min(width + extra, maxWidth);
+    typewriterContainer.style.minWidth = finalWidth + 'px';
+    typewriterContainer.style.width = finalWidth + 'px';
+  }
+
+  // Measure after fonts load for accuracy
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(measureAndSetTypewriterWidth);
+  } else {
+    window.addEventListener('load', measureAndSetTypewriterWidth);
+  }
+
+  // Recalculate on resize (debounced)
+  let resizeTO;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTO);
+    resizeTO = setTimeout(measureAndSetTypewriterWidth, 150);
+  });
+
+  // Initial measure
+  measureAndSetTypewriterWidth();
 
   // ============================================================================
   // STAGGER ANIMATIONS FOR ELEMENTS
